@@ -143,44 +143,50 @@ def _twilio_send_message(sid: str, token: str, from_: str, to: str,
 
 
 async def send_whatsapp(to: str, body: str, *, transport: httpx.AsyncBaseTransport | None = None) -> str:
+    """Send WhatsApp alert. First attempts to send the actual TenderHawk bid details body (within 24-hr session),
+    and falls back to ContentSid template only if Twilio requires it outside the session.
+    """
     sid, token, sender = _env("TWILIO_ACCOUNT_SID"), _env("TWILIO_AUTH_TOKEN"), _env("TWILIO_WHATSAPP_FROM")
     if not (sid and token and sender and to):
         return "not_configured"
     content_sid = _env("TWILIO_CONTENT_SID")
     url = f"https://api.twilio.com/2010-04-01/Accounts/{sid}/Messages.json"
 
-    data = _twilio_send_message(sid, token, _whatsapp_number(sender), _whatsapp_number(to), body, content_sid)
+    # 1. Attempt sending the REAL tender details message via Body
     try:
         async with httpx.AsyncClient(timeout=SEND_TIMEOUT, transport=transport) as c:
-            r = await c.post(url, auth=(sid, token), data=data)
+            r = await c.post(url, auth=(sid, token),
+                             data={"From": _whatsapp_number(sender), "To": _whatsapp_number(to), "Body": body})
     except httpx.HTTPError as e:
         log.warning("whatsapp send failed: %r", e)
         return f"failed: {type(e).__name__}"
 
-    if r.status_code >= 400:
+    if r.status_code < 400:
+        log.info("WhatsApp real tender details sent successfully via Body!")
+        return "sent"
+
+    # 2. Outside 24-hour session or trial template required: fall back to ContentSid template if available
+    try:
+        msg = r.json().get("message", r.text)
+    except ValueError:
+        msg = r.text
+    log.warning("twilio whatsapp Body rejected (%s: %s), trying template fallback...", r.status_code, msg)
+
+    if content_sid and ("contentsid" in str(msg).lower() or "63016" in str(msg) or "63015" in str(msg) or "21654" in str(msg)):
         try:
-            msg = r.json().get("message", r.text)
-        except ValueError:
-            msg = r.text
-        log.warning("twilio whatsapp %s: %s", r.status_code, msg)
+            async with httpx.AsyncClient(timeout=SEND_TIMEOUT, transport=transport) as c:
+                r_template = await c.post(url, auth=(sid, token),
+                                          data={"From": _whatsapp_number(sender), "To": _whatsapp_number(to), "ContentSid": content_sid})
+            if r_template.status_code < 400:
+                log.info("WhatsApp sent via ContentSid template fallback")
+                return "sent (template fallback: reply to the message on WhatsApp to receive full bid details)"
+        except httpx.HTTPError:
+            pass
 
-        # If ContentSid was rejected (wrong template), try with Body as fallback (upgraded accounts)
-        if content_sid and ("ContentSid" in str(msg) or "21654" in str(msg)):
-            log.info("ContentSid rejected, retrying WhatsApp with Body (upgraded account?)")
-            try:
-                async with httpx.AsyncClient(timeout=SEND_TIMEOUT, transport=transport) as c:
-                    r2 = await c.post(url, auth=(sid, token),
-                                      data={"From": _whatsapp_number(sender), "To": _whatsapp_number(to), "Body": body})
-                if r2.status_code < 400:
-                    return "sent"
-            except httpx.HTTPError:
-                pass
-
-        if "contentsid" in str(msg).replace(" ", "").lower() or "63016" in str(msg) or "63015" in str(msg):
-            return ("failed: the phone hasn't messaged the Twilio sandbox in the last 24 h. Send the sandbox "
-                    "join message (e.g. 'join <code>') to +1 415 523 8886 on WhatsApp, then retry")
-        return f"failed: {msg}"[:300]
-    return "sent"
+    if "contentsid" in str(msg).replace(" ", "").lower() or "63016" in str(msg) or "63015" in str(msg):
+        return ("failed: the phone hasn't messaged the Twilio number in the last 24 h. Send 'hi' or reply to "
+                f"{sender} on WhatsApp to open a 24-hr session, then retry")
+    return f"failed: {msg}"[:300]
 
 
 async def send_sms(to: str, body: str, *, transport: httpx.AsyncBaseTransport | None = None) -> str:
