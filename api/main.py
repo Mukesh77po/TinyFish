@@ -179,6 +179,7 @@ async def send_alert(match_id: int):
     return res
 
 
+@app.get("/", include_in_schema=False)
 @app.get("/demo", include_in_schema=False)
 def demo_page():
     """Single-page demo console (stopgap until the Next.js dashboard in web/)."""
