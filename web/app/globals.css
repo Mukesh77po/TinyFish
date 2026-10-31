@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+/* TenderHawk palette, from the Stitch design system ("TenderHawk AI Tender Intelligence"): navy chrome, amber
+   actions, a soft grey canvas with white cards, and green / amber / red kept for verdicts only.
+   Fonts are self-hosted by next/font at build time, so the dashboard still renders with no network. */
+@theme {
+  --color-navy: #0b1322;
+  --color-navy-2: #131d31;
+  --color-navy-3: #162238;
+  --color-amber: #f59e0b;
+  --color-amber-hover: #e08e00;
+
+  --color-ink: #0b1322;
+  --color-ink-soft: #64748b;
+  --color-paper: #f4f6fa;
+  --color-paper-2: #eef2f7;
+  --color-card: #ffffff;
+  --color-line: #e2e8f0;
+  --color-hawk: #f59e0b;
+  --color-ok-bg: #ecfdf5;
+  --color-ok: #047857;
+  --color-warn-bg: #fffbeb;
+  --color-warn: #b45309;
+  --color-bad-bg: #fef2f2;
+  --color-bad: #b91c1c;
+  --color-info-bg: #eff6ff;
+  --color-info: #1d4ed8;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-heading: var(--font-grotesk), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.025em;
+}
+
+/* Keyboard users always see where they are. */
+:focus-visible {
+  outline: 3px solid var(--color-amber);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+mark {
+  background: #fde68a;
+  color: inherit;
+  padding: 0 2px;
+  border-radius: 3px;
+}
+
+::selection {
+  background: #fbbf24;
+  color: #0b1322;
+}

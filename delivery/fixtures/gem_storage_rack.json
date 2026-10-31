@@ -1,0 +1,197 @@
+{
+  "portal": "gem",
+  "category": "storage rack",
+  "url": "https://bidplus.gem.gov.in/all-bids",
+  "goal": "Type 'storage rack' into the bid search box and run the search. If page 1 has no relevant bids, search once more using only the last word of 'storage rack' (e.g. 'rack') and apply the same relevance rule. If the results allow sorting, sort by bid end date with the latest closing first. For each bid card read: bid_no (e.g. GEM/2026/B/1234567), title (the FULL 'Items' text; if it is cut off with '...', read the full text from its tooltip or title attribute, or open the bid details, and never return a value ending in '...'), item (the main product name), buyer (ministry and department), quantity, end_date (the 'End Date' value with time), doc_url (absolute link of the bid number, which opens the bid document). Look through up to 3 result pages to find matching bids. Today is 25 Oct 2026. Only keep bids closing on or after 27 Oct 2026 (skip anything closing sooner). Relevance: keep a bid only if its items/title describe 'storage rack' itself or a close variant; never keep a bid just because the ministry, department or organisation name contains a search word. Return at most 10 bids. If a captcha, OTP or login wall appears, do NOT try to solve it: stop immediately and return blocked=true with blocked_reason and an empty bids list. blocked is ONLY for captcha/login/site errors: if the site works but nothing relevant is found, return blocked=false and an empty bids list. This is read-only: never click submit, participate, or bid buttons. Copy values exactly as shown (end_date with its time, est_value in INR as shown); use absolute URLs for doc_url; use an empty string for anything not shown.",
+  "recorded_at": "2026-10-25T03:32:08.514287+05:30",
+  "run_id": "323029a9-fc63-4c48-aa2f-27b19355cdf9",
+  "steps": [
+    {
+      "step": 1,
+      "message": "Navigate to GEM bid search page"
+    },
+    {
+      "step": 2,
+      "message": "Type search term 'storage rack'"
+    },
+    {
+      "step": 3,
+      "message": "Execute search for storage rack"
+    },
+    {
+      "step": 4,
+      "message": "Open sort dropdown to sort by Bid End Date"
+    },
+    {
+      "step": 5,
+      "message": "Sort by Bid End Date Latest First"
+    },
+    {
+      "step": 6,
+      "message": "Extract all bid details from page 1"
+    },
+    {
+      "step": 7,
+      "message": "Get full data-content details for all bids"
+    },
+    {
+      "step": 8,
+      "message": "Get exact data-content for all item links"
+    },
+    {
+      "step": 9,
+      "message": "Extract all bid card details with data-content"
+    },
+    {
+      "step": 10,
+      "message": "Clear and type 'rack' for second search"
+    },
+    {
+      "step": 11,
+      "message": "Search for 'rack' keyword"
+    },
+    {
+      "step": 12,
+      "message": "Extract all bid details from rack search page 1"
+    },
+    {
+      "step": 13,
+      "message": "Go to page 2 of rack search results"
+    },
+    {
+      "step": 14,
+      "message": "Extract all bid details from page 2 rack search"
+    },
+    {
+      "step": 15,
+      "message": "Check page 2 bid card details visually"
+    },
+    {
+      "step": 16,
+      "message": "Go to page 3 of rack search results"
+    },
+    {
+      "step": 17,
+      "message": "Extract all bid details from page 3 rack search"
+    },
+    {
+      "step": 18,
+      "message": "Verify page 1 rack search bid cards"
+    },
+    {
+      "step": 19,
+      "message": "Go to page 1 of rack search results"
+    },
+    {
+      "step": 20,
+      "message": "Get details for Metal Shelving Racks bid"
+    },
+    {
+      "step": 21,
+      "message": "Visual context of all bid cards on page 1"
+    },
+    {
+      "step": 22,
+      "message": "Get details for last card on page 1"
+    },
+    {
+      "step": 23,
+      "message": "Get full data-content for metal shelving racks bid"
+    },
+    {
+      "step": 24,
+      "message": "Find items link with data-content for metal shelving racks"
+    },
+    {
+      "step": 25,
+      "message": "Extract full details for metal shelving racks bid"
+    },
+    {
+      "step": 26,
+      "message": "Extract full data-content for all items on page 1"
+    },
+    {
+      "step": 27,
+      "message": "Check other details for metal shelving racks bid"
+    },
+    {
+      "step": 28,
+      "message": "Submit final result with 1 relevant storage rack bid"
+    }
+  ],
+  "raw_result": {
+    "blocked": false,
+    "blocked_reason": "",
+    "bids": [
+      {
+        "bid_no": "GEM/2026/B/8128985",
+        "title": "Metal Shelving Racks (Adjustable)",
+        "item": "Metal Shelving Racks (Adjustable)",
+        "buyer": "Technical Education Training and Skill Development Department, West Bengal",
+        "quantity": "53",
+        "est_value": "",
+        "end_date": "21-11-2026 5:00 PM",
+        "doc_url": "https://bidplus.gem.gov.in/showbidDocument/9998812"
+      }
+    ]
+  },
+  "result": [
+    {
+      "portal": "gem",
+      "bid_no": "GEM/2026/B/8128985",
+      "title": "Metal Shelving Racks (Adjustable)",
+      "item": "Metal Shelving Racks (Adjustable)",
+      "buyer": "Technical Education Training and Skill Development Department, West Bengal",
+      "quantity": "53",
+      "est_value": null,
+      "end_date": "2026-11-21T17:00:00+05:30",
+      "doc_url": "https://bidplus.gem.gov.in/showbidDocument/9998812",
+      "source_url": "https://bidplus.gem.gov.in/showbidDocument/9998812"
+    }
+  ],
+  "docs": {
+    "https://bidplus.gem.gov.in/showbidDocument/9998812": "Bid Details\nBid End Date/Time\n21-11-2026 17:00:00\nBid Opening\nDate/Time\n22-11-2026 17:00:00\nBid Offer\nValidity (From End Date)\n30 (Days)\nMinistry/State Name\nWest Bengal\nDepartment Name\nTechnical Education Training And Skill Development\nDepartment West Bengal\nOrganisation Name\nDirectorate Of Technical Education And Training\nOffice Name\nWest Bengal\nContact details of\nGrievance redressal\nHOD Email id :asst.dir2.dtet-wb@gov.in\nBuyer Email id: buycon24.dtet.wb@gembuyer.in\nTotal Quantity\n53\nItem Category\nMetal Shelving Racks (Adjustable Type) conforming To Is\n1883 (V2) (Q2) , Steel Filing Cabinets for General Office\nPurpose conforming to IS 3313 (V2) (Q2) , Steel Almirah /\nCabinets (V4) (Q2)\nMSE Relaxation for Years of\nExperience and Turnover\nNo\nStartup Relaxation for Years of\nExperience and Turnover\nNo\nMinimum number of\nbids required to disable automatic bid\nextension\n1\nNumber of days for which Bid\nwould be auto-extended\n10\nNumber of Auto Extension count\n1\nBid to RA enabled\nNo\nType of Bid\nTwo Packet Bid\nBid Number: GEM/2026/B/8128985\nDated: 07-10-2026\nBid Document\n1 / 11\nPrimary product category\nSteel Almirah / Cabinets (V4)\nTime allowed for Technical\nClarifications during technical evaluation\n20 Days\nInspection Required (By\nEmpanelled Inspection Authority / Agencies\npre-registered with GeM)\nNo\nEvaluation Method\nTotal value wise evaluation\nArbitration Clause\nNo\nMediation Clause\nNo\nBid Details\nEMD Detail\nRequired\nNo\nePBG Detail\nRequired\nNo\nBid splitting not applied.\nMII Purchase Preference\nMII Purchase Preference\nYes\nPurchase\nPreference to MII sellers availabele upto price\nwithin L1+X%\n20\nMaximum Percentage of Bid\nquantity for MII purchase preference\n50\nAllow\nparticipation only from Class 1/Class 2 local\nsuppliers as per the Public\nprocurement(Preference to Make-in-india) order\n2017 date 16.09.2020(as amended and\napplicable time to time)\nYes, in compliance with the MII ORDER : DPIIT Order(as\namended and applicable time to time)\n2 / 11\nMSE Purchase Preference\nMSE Purchase Preference\nYes\nPurchase Preference to MSE OEMs/ Service\nProvider available upto price within L1+X%\n15\nPercentage of Bid quantity/amount for\nMSE OEMs/ Service Provider Purchase preference\n25\n1. Preference to Make In India products (For bids < 200 Crore):Preference shall be given to Class 1 local supplier\nas defined in public procurement (Preference to Make in India), Order 2017 as amended from time to time and its\nsubsequent Orders/Notifications issued by concerned Nodal Ministry for specific Goods/Products. The minimum\nlocal content to qualify as a Class 1 local supplier is denoted in the bid document. If the bidder wants to avail the\nPurchase preference, the bidder must upload a certificate from the OEM regarding the percentage of the local\ncontent and the details of locations at which the local value addition is made along with their bid, failing which\nno purchase preference shall be granted. In case the bid value is more than Rs 10 Crore, the declaration relating\nto percentage of local content shall be certified by the statutory auditor or cost auditor, if the OEM is a company\nand by a practicing cost accountant or a chartered accountant for OEMs other than companies as per the Public\nProcurement (preference to Make-in -India) order 2017 dated 04.06.2020. Only Class-I and Class-II Local suppliers\nas per MII order dated 4.6.2020 will be eligible to bid. Non - Local suppliers as per MII order dated 04.06.2020 are\nnot eligible to participate. However, eligible micro and small enterprises will be allowed to participate .The\nbuyers are advised to refer the OM No.F.1/4/2021-PPD dated 18.05.2023.\nOM_No.1_4_2021_PPD_dated_18.05.2023 for compliance of Concurrent application of Public Procurement Policy\nfor Micro and Small Enterprises Order, 2012 and Public Procurement (Preference to Make in India) Order, 2017\nand its subsequent Orders/Notifications issued by concerned Ministry .Benefits of MSE will be allowed only if\nseller/service provider is validated on-line in GeM profile as well as validated and approved by Buyer after\nevaluation of documents submitted.\n2. Purchase preference to Micro and Small Enterprises (MSEs): Purchase preference will be given to MSEs having\nvalid Udyam Certificate and whose credentials are validated online through Udyam Registration portal as defined\nin Public Procurement Policy for Micro and Small Enterprises (MSEs) Order, 2012 dated 23.03.2012 issued by\nMinistry of Micro, Small and Medium Enterprises and its subsequent Orders/Notifications issued by concerned\nMinistry. If the bidder wants to avail themselves of the Purchase preference, the bidder must be the\nmanufacturer / OEM of the offered product on GeM. In respect of bid for Services, the bidder must be the Service\nprovider of the offered Service. Traders are excluded from the purview of Public Procurement Policy for Micro and\nSmall Enterprises and hence resellers offering products manufactured by some other OEM are not eligible for any\npurchase preference. Relevant documentary evidence in this regard shall be uploaded along with the bid in\nrespect of the offered product or service, and Buyer will decide eligibility for purchase preference based on\ndocumentary evidence submitted in case of product bids, whereas in case of services the eligibility is\nautomatically validated. If L-1 is not an MSE and MSE Seller (s) has / have quoted price within L-1+ 15% (Selected\nby Buyer) of margin of purchase preference /price band defined in relevant policy, such MSE Seller shall be given\nopportunity to match L-1 price and contract will be awarded for 25% (selected by Buyer) percentage of total\nquantity. The buyers are advised to refer the OM_No.1_4_2021_PPD_dated_18.05.2023 for compliance of\nConcurrent application of Public Procurement Policy for Micro and Small Enterprises Order, 2012 and Public\nProcurement (Preference to Make in India) Order, 2017. Benefits of MSE will be allowed only if seller is validated\non-line in GeM profile as well as validated and approved by Buyer after evaluation of documents submitted.\nMetal Shelving Racks (Adjustable Type) Conforming To Is 1883 (V2) ( 30 pieces )\nMinimum 50% and 20% Local\nContent required for qualifying as Class 1 and Class 2 Local Supplier respectively)\nTechnical Specifications\n3 / 11\nAs per GeM Category Speciﬁcation\nSpeciﬁcation\nSpecification\nName\nBid Requirement\n(Allowed Values)\nSTANDARDS AND\nCERTIFICATIONS\nGoverning Standard\nConformity to IS 1883\nGENERIC\nTypes of Shelving Racks\nOpen-type (No side and back sheets)\nDIMENSIONS AND\nTOLERANCES\nOverall Height of Shelving\nRacks (Tolerance: ± 50 mm)\n1875 mm, 2175 mm\nOverall Depth of Shelving\nRacks (Tolerance: ± 10 mm)\n400 mm, 600 mm\nMATERIAL\nREQUIREMENTS\nType of material for rack\nshelves\nMetal\nMaterial of rack shelves\nSteel Sheet - Grade HR1 of IS 1079, Steel Sheet -\nGrade CR1 of IS 513 (Part 1)\nFinish of Wooden Rack\nShelves\nNA\nType of Polish on wooden rack\nshelves (Hint: Select NA for\npainted wooden components)\nNA\nColor Family of Painted wooden\nrack shelves (Hint: Select NA\nfor polished wooden\ncomponents)\nNA\nType of material for rack\nsides\nNA\nMaterial of rack Sides\nNA\nFinish of Wooden rack sides\nNA\nType of Polish on wooden rack\nsides (Hint: Select NA for\npainted wooden components)\nNA\nColor Family of Painted wooden\nrack sides (Hint: Select NA for\npolished wooden components)\nNA\nType of material for rack\npanel\nMetal\nMaterial of rack panel\nSteel Sheet - Grade HR1 of IS 1079, Steel Sheet -\nGrade CR1 of IS 513 (Part 1)\nFinish of Wooden rack\npanel\nNA\nType of Polish on wooden rack\npanel (Hint: Select NA for\npainted wooden components)\nNA\nColor Family of Painted wooden\nrack panel (Hint: Select NA for\npolished wooden components)\nNA\nAvailability of Strips\nYes, No\n4 / 11\nAvailability of Binstrips\nNo\nTest Report Details\nAvailability of test report\ncertifying conformity to IS 1883\nYes, No\nType of test report\nBIS / BIS - Registered / BIS - Empanelled Lab, NA\nSpeciﬁcation\nSpecification\nName\nBid Requirement\n(Allowed Values)\nConsignees/Reporting Officer and Quantity\nS.N\no.\nConsignee\nReporting/Officer\nAddress\nQuantity\nDelivery\nDays\n1\nDEBJYOTI DAS\n700058,50, DD Mondal Ghat\nRd, Dakshineswar, Kolkata,\nWest Bengal\n30\n60\nSteel Filing Cabinets For General Office Purpose Conforming To IS 3313 (V2) ( 3 pieces\n)\nMinimum 50% and 20% Local\nContent required for qualifying as Class 1 and Class 2 Local Supplier respectively)\nTechnical Specifications\nAs per GeM Category Speciﬁcation\nSpeciﬁcation\nSpecification\nName\nBid Requirement\n(Allowed Values)\nGENERAL\nREQUIREMENT\nType of steel filing cabinets\nFour – drawer type\nThe drawer provided with\nClutch Compressor plate, Cradle strip\nThe drawer is fitted with an\nautomatic check (to provide\nrebound)\nYes, Not Applicable\nType of drawer suspension\nBall-bearing suspension, Solid-roller suspension\nDrawer Pull-up\nWith a handle, With a built-in pull\nMATERIAL\nSteel sheet material\nHot rolled carbon steel sheet conforming to HR0\ngrade of IS 1079:2017 (with the latest amendment),\nCold-reduced carbon steel sheet conforming to CR0\ngrade of IS 513:2016 (with the latest amendment)\nCradle strips material\nGalvanized steel, Painted steel\nLabel holder material\nCorrosion-resistant material sheet, Mild steel sheet\n5 / 11\nLOCKS\nLock type\nMinimum 4 Pins cylindrical type conforming to IS\n729:2021 (with the latest amendment), Hasp lock\nDIMENSION\nOverall height from finished\nfloor level to top of the\ncabinet including pedestal\n1380 mm(for four drawer type), 1320 mm (for four\ndrawer types)\nCOLOUR AND FINISH\nProduct colour\nGrey\nThe corner is to be rounded\nYes, No\nFinish with\nEnamel paint coat/coats confirming to IS:151-1950,\nEnamel paint coat/coats confirming to IS:2932-1974,\nEnamel paint coat/coats confirming to IS:2933-1975,\nStoving enamel, Epoxy polyester powder coated to\nthe thickness of 50(+/-10)microns\nTESTING AND\nCERTIFICATION\nBIS marked\nYes, No\nAvailability of test reports\nfrom AHSP /NABL /ILAC\naccredited or Central\nGovernment Lab to prove\nthe conformity of products\nto the specification\nYes, No\nTest reports to be furnished\nto buyer on demand, if\nclaimed to be available\nYes, NA\nSpeciﬁcation\nSpecification\nName\nBid Requirement\n(Allowed Values)\nConsignees/Reporting Officer and Quantity\nS.N\no.\nConsignee\nReporting/Officer\nAddress\nQuantity\nDelivery\nDays\n1\nDEBJYOTI DAS\n700058,50, DD Mondal Ghat\nRd, Dakshineswar, Kolkata,\nWest Bengal\n3\n62\nSteel Almirah / Cabinets (V4) ( 16 pieces )\nMinimum 50% and 20% Local\nContent required for qualifying as Class 1 and Class 2 Local Supplier respectively)\nTechnical Specifications\nAs per GeM Category Speciﬁcation\n6 / 11\nSpeciﬁcation\nSpecification\nName\nBid Requirement\n(Allowed Values)\nSTANDARDS AND\nCERTIFICATIONS\nGoverning Standard\nConformity to IS 3312\nGENERIC\nTypes of Almirah\n(Dimensions are without\npedestal height)\nLarge (1855 mm X 910 mm X 480 mm)\nType of Mild Steel Sheets\nGrade CR1 of IS 513 (Part 1)\nColor family of the Steel\nAlmirah / Shelving Cabinet\nSilver Grey\nAvailability of Drawers\nYes, No\nNo of Drawers\n0, 1\nAvailability of Lockers\nYes, No\nNumber of lockers (Hint:\nDimension of lockers to be as\nper clause 5-10)\nNA, 1\nADDITIONAL\nACCESSORIES\nAvailability of Hanging Rod\nNo\nAvailability of Mirror frame\nNo\nAvailability of Mirror\nNo\nAvailability of Tie Hanger\nNo\nMaterial of Tie Hanger\nNA\nTest Report Details\nAvailability of test report\ncertifying conformity to IS 3312\nYes, No\nType of test report\nNABL / NABL Accredited Lab, ILAC Lab, APAC Lab, BIS\n/ BIS - Registered / BIS - Empanelled Lab, NA\nConsignees/Reporting Officer and Quantity\nS.N\no.\nConsignee\nReporting/Officer\nAddress\nQuantity\nDelivery\nDays\n1\nDEBJYOTI DAS\n700058,50, DD Mondal Ghat\nRd, Dakshineswar, Kolkata,\nWest Bengal\n16\n60\nSteel Filing Cabinets For General Office Purpose Conforming To IS 3313 (V2) ( 4 pieces\n)\nMinimum 50% and 20% Local\nContent required for qualifying as Class 1 and Class 2 Local Supplier respectively)\nTechnical Specifications\n7 / 11\nAs per GeM Category Speciﬁcation\nSpeciﬁcation\nSpecification\nName\nBid Requirement\n(Allowed Values)\nGENERAL\nREQUIREMENT\nType of steel filing cabinets\nFour – drawer type\nThe drawer provided with\nClutch Compressor plate, Cradle strip\nThe drawer is fitted with an\nautomatic check (to provide\nrebound)\nNot Applicable\nType of drawer suspension\nBall-bearing suspension, Solid-roller suspension\nDrawer Pull-up\nWith a handle, With a built-in pull\nMATERIAL\nSteel sheet material\nCold-reduced carbon steel sheet conforming to CR0\ngrade of IS 513:2016 (with the latest amendment)\nCradle strips material\nPainted steel, Not Applicable\nLabel holder material\nCorrosion-resistant material sheet\nLOCKS\nLock type\nMinimum 6 levers Automatic unit type conforming to\nIS 729:2021 (with the latest amendment), Minimum 4\nPins cylindrical type conforming to IS 729:2021 (with\nthe latest amendment), CAM lock, Number lock, Hasp\nlock\nDIMENSION\nOverall height from finished\nfloor level to top of the\ncabinet including pedestal\n1380 mm(for four drawer type), 1320 mm (for four\ndrawer types)\nCOLOUR AND FINISH\nProduct colour\nGrey\nThe corner is to be rounded\nYes, No\nFinish with\nEnamel paint coat/coats confirming to IS:151-1950,\nEnamel paint coat/coats confirming to IS:2932-1974,\nEnamel paint coat/coats confirming to IS:2933-1975,\nStoving enamel, Epoxy polyester powder coated to\nthe thickness of 50(+/-10)microns\nTESTING AND\nCERTIFICATION\nBIS marked\nYes, No\nAvailability of test reports\nfrom AHSP /NABL /ILAC\naccredited or Central\nGovernment Lab to prove\nthe conformity of products\nto the specification\nYes, No\nTest reports to be furnished\nto buyer on demand, if\nclaimed to be available\nYes, NA\nConsignees/Reporting Officer and Quantity\n8 / 11\nS.N\no.\nConsignee\nReporting/Officer\nAddress\nQuantity\nDelivery\nDays\n1\nDEBJYOTI DAS\n700058,50, DD Mondal Ghat\nRd, Dakshineswar, Kolkata,\nWest Bengal\n4\n60\nBuyer Added Bid Specific Terms and Conditions\n1. Generic\nBidder financial standing: The bidder should not be under liquidation, court receivership or similar\nproceedings, should not be bankrupt. Bidder to upload undertaking to this effect with bid.\n2. Generic\nBidders are advised to check applicable GST on their own before quoting. Buyer will not take any\nresponsibility in this regards. GST reimbursement will be as per actuals or as per applicable rates\n(whichever is lower), subject to the maximum of quoted GST %.\n3. OEM\nIMPORTED PRODUCTS: In case of imported products, OEM or Authorized Seller of OEM should have a\nregistered office in India to provide after sales service support in India. The certificate to this effect should\nbe submitted.\n4. Turnover\nBidder Turn Over Criteria: The minimum average annual financial turnover of the bidder during the last\nthree years, ending on 31st March of the previous financial year, should be as indicated in the bid\ndocument. Documentary evidence in the form of certified Audited Balance Sheets of relevant periods or a\ncertificate from the Chartered Accountant / Cost Accountant indicating the turnover details for the\nrelevant period shall be uploaded with the bid. In case the date of constitution / incorporation of the\nbidder is less than 3 year old, the average turnover in respect of the completed financial years after the\ndate of constitution shall be taken into account for this criteria.\n5. Service & Support\nAvailability of Service Centres: Bidder/OEM must have a Functional Service Centre in the State of each\nConsignee's Location in case of carry-in warranty. (Not applicable in case of goods having on-site\nwarranty). If service center is not already there at the time of bidding, successful bidder / OEM shall have\nto establish one within 30 days of award of contract. Payment shall be released only after submission of\ndocumentary evidence of having Functional Service Centre.\n6. Service & Support\nDedicated /toll Free Telephone No. for Service Support : BIDDER/OEM must have Dedicated/toll Free\nTelephone No. for Service Support.\n7. Purchase Preference (State)\nBid reserved for MSE from the State of Bid Inviting Authority: Procurement under this bid is\nreserved for purchase from Micro and Small Enterprises from the State of Bid Inviting Authority having\nvalid Udyam Registration and whose credentials are validated online through Udyam Registration portal.\nIf the bidder wants to avail themselves of the reservation benefit, the bidder must be the manufacturer /\nOEM of the offered product on GeM. Traders are excluded from the purview of Public Procurement Policy\nfor Micro and Small Enterprises and hence resellers offering products manufactured by some other OEM\nare not eligible to participate in this bid. In respect of bid for Services, the bidder must be the Service\n9 / 11\nprovider of the offered Service. Relevant documentary evidence in this regard shall be uploaded along\nwith the bid in respect of the offered product or service, and Buyer will decide eligibility based on\ndocumentary evidence submitted, while evaluating the bid. Benefits of MSE will be allowed only if seller is\nvalidated on-line in GeM profile as well as validated and approved by Buyer after evaluation of documents\nsubmitted.\n8. Warranty\nSuccessful bidder will have to ensure that adequate number of dedicated technical service personals /\nengineers are designated / deployed for attending to the Service Request in a time bound manner and for\nensuring Timely Servicing / rectification of defects during warranty period, as per Service level agreement\nindicated in the relevant clause of the bid.\n9. Financial Criteria\nNET WORTH: Net Worth of the OEM should be positive as per the last audited financial statement.\nDisclaimer\nThe Additional Terms and Conditions (ATC) have been incorporated by the Buyer after approval of their\nCompetent Authority. The Buyer ,is solely responsible for the impact of these clauses on the bidding process, its\noutcome, and consequences thereof including any restriction arising in the bidding process due to these ATCs\nand including the modification of technical specifications and / or terms and conditions governing the bid.All\nrepresentations / grievances pertaining to the ATC clauses shall be raised with the buyer organization directly\nand not with GeM.If any of the clause(s) is/are incorporated by the Buyer regarding the following, the bid &\nresultant contract shall be treated as null & void. Further, GeM reserves the right, at its sole discretion, to cancel\nthe bid forthwith, without issuance of any prior notice or intimation :-\n1. Publishing Custom / BOQ bids for items for which regular GeM categories are available (unless such\nCustom / BOQ item is bunched with the major regular product Category Item).\n2. Mandating procurement of / from specific Brand / Make / Model / Manufacturer / Dealer except in case of\nSingle Bid / Proprietary Article Certificate (PAC) Buying.\n3. Inclusion of disqualification criteria related to suspension of seller / service provider, where such\nsuspension period has already expired.\n4. Mandating submission of documents (other than EMD and signed Integrity Pact - which can be submitted\nwithin 5 days of bid opening) in physical form as a pre-requisite to qualify bidders.\n5. Publishing bids on GeM for procurement of works.\n6. Procurement of Goods by creating a Service bid on GeM & vice-versa.\n7. Seeking sample with bid or approval of samples during bid evaluation process. However, trial / sample, as\nthe case may be, shall be permitted in cases where trial / sample are allowed as per approved and\npublished procurement policy of the Buyers’ controlling Ministry / Department / State / Public Sector\nEnterprises Headquarters. If there is any violation of trial / sample clause with regard to approved policy\nof the Buyers’ Ministry / Department / State / Public Sector Enterprises Headquarters, then this is to be\ndetermined and redressed by the concerned Buyer Organisation only.\n8. Seeking experience from specific organization / department / institute only or from foreign / export\nexperience.\n9. Creating bid for items from incorrect categories.\n10. Reference of conditions published on any external site or reference to external documents/clauses.\n11. Asking for any Tender fee / Bid Participation fee, as the case may be.\n12. Buyer added ATC Clauses which are in contravention of clauses defined in bid detail section, including\nspecifications, EMD Detail, ePBG Detail and MII and MSE Purchase Preference sections of the bid, unless\notherwise allowed by the applicable GeM GTC.\n13. Any ATC clause in contravention with GeM GTC Clause 4 (xiii) (h) will be invalid. In case of multiple L1\nbidders against a service bid, the buyer shall place the Contract by selection of a bidder amongst the L-1\nbidders through a Random Algorithm executed by GeM system.\n14. In a category based bid, adding additional items, through buyer added, additional scope of work/\nadditional terms and conditions/or any other document. If buyer needs more items along with the main\nitem, the same must be added through bunching category based items or by bunching custom catalogues\n10 / 11\nor bunching a BoQ with the main category based item, the same must not be done through ATC or Scope\nof Work.\nFurther, if any seller has any objection/grievance against these additional clauses or otherwise on any aspect of\nthis bid, they can raise their representation against the same by using the Representation window provided in\nthe bid details field in Seller dashboard after logging in as a seller. Buyer is duty bound to reply to all such\nrepresentations and would not be allowed to open bids if he fails to reply to such representations.\nAll GeM Sellers/Service Providers shall ensure full compliance with all applicable labour laws,\nincluding the provisions, rules, schemes and guidelines under the four Labour Codes i.e. the Code\non Wages, 2019; the Industrial Relations Code, 2020; the Occupational Safety, Health and Working\nConditions Code, 2020; and the Code on Social Security, 2020 as and when notified and brought into\nforce by the Government of India.\nFor all provisions of the Labour Codes that are pending operationalisation through rules, schemes or\nnotifications, the corresponding provisions of the pre-existing labour enactments (such as The\nMinimum Wages Act, 1948, The Payment of Wages Act, 1936, The Payment of Bonus Act, 1965, The\nEqual Remuneration Act, 1976, The Payment of Gratuity Act, 1972, etc. and relevant State Rules)\nshall continue to remain applicable.\nThe Seller/ Service Providers shall, therefore, be responsible for ensuring compliance under:\nAll notified and enforceable provisions of the new Labour Codes as mentioned hereinabove;\nand\nAll operative provisions of the erstwhile Labour Laws until their complete substitution.\nAll obligations relating to wages, social security, safety, working conditions, industrial relations etc.\nand any other statutory requirements shall be strictly met by the Seller/ Service Provider. Any non-\ncompliance shall constitute a breach of the contract and shall entitle the Buyer to take appropriate\naction in accordance with the contract and applicable law.\nThis Bid is governed by the General Terms and Conditions, conditions stipulated in Bid and Service\nLevel Agreement specific to the Service, as the case may be, as provided in the Marketplace.\nHowever, in case of Service, if any condition specified in General Terms and Conditions is\ncontradicted by the conditions stipulated in Service Level Agreement specific to said Service, then it\nwill over-ride the conditions in the General Terms and Conditions.\nThis Bid is also governed by the General Terms and Conditions\nIn terms\nof GeM GTC clause 26 regarding Restrictions on procurement from a bidder of a country which shares a land border with India, any bidder from a country which shares a\nland border with India will be eligible to bid in this tender only if the bidder is registered with the Competent Authority. While participating in bid, Bidder has to undertake\ncompliance of this and any false declaration and non-compliance of this would be a ground for immediate termination of the contract and further legal action in\naccordance with the laws.\nThank You---\n11 / 11"
+  },
+  "eligibility": {
+    "https://bidplus.gem.gov.in/showbidDocument/9998812": {
+      "min_turnover": {
+        "value": null,
+        "source_clause": null
+      },
+      "past_experience_years": {
+        "value": null,
+        "source_clause": null
+      },
+      "emd_amount": {
+        "value": 0.0,
+        "source_clause": "EMD Detail Required No"
+      },
+      "emd_exemption_for_mse": {
+        "value": null,
+        "source_clause": null
+      },
+      "mse_relaxation_experience_turnover": {
+        "value": false,
+        "source_clause": "MSE Relaxation for Years of Experience and Turnover No"
+      },
+      "startup_relaxation_experience_turnover": {
+        "value": false,
+        "source_clause": "Startup Relaxation for Years of Experience and Turnover No"
+      },
+      "required_certifications": {
+        "value": [],
+        "source_clause": null
+      },
+      "documents_required": {
+        "value": [
+          "Undertaking regarding financial standing"
+        ],
+        "source_clause": "Bidder financial standing: The bidder should not be under liquidation, court receivership or similar proceedings, should not be bankrupt. Bidder to upload undertaking to this effect with bid."
+      },
+      "states": {
+        "value": [],
+        "source_clause": null
+      }
+    }
+  }
+}

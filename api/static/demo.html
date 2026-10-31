@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TenderHawk Demo</title>
+<style>
+  :root {
+    --bg: #f5f6f8; --card: #ffffff; --ink: #14171f; --muted: #5d6475; --line: #e3e6ec;
+    --green: #127a3d; --green-bg: #e3f5ea; --amber: #a35a00; --amber-bg: #fff1dc;
+    --red: #b42318; --red-bg: #fde7e5; --blue: #1f5fbf; --blue-bg: #e6eefb; --accent: #1b3a6b;
+    --hl: #ffe58a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font: 16px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  header { background: var(--accent); color: #fff; padding: 14px 24px; display: flex; align-items: center; gap: 16px; }
+  header h1 { margin: 0; font-size: 24px; letter-spacing: .3px; }
+  header .tag { opacity: .85; font-size: 15px; }
+  header .mode { margin-left: auto; font-size: 13px; padding: 4px 10px; border-radius: 999px; background: rgba(255,255,255,.15); }
+  main { padding: 18px 24px 40px; max-width: 1500px; margin: 0 auto; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
+  .row { display: grid; gap: 16px; }
+  .top { grid-template-columns: 1fr auto; align-items: center; }
+  .profile h2 { margin: 0 0 4px; font-size: 20px; }
+  .facts { display: flex; flex-wrap: wrap; gap: 6px 18px; color: var(--muted); font-size: 15px; }
+  .facts b { color: var(--ink); font-weight: 600; }
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .pill { font-size: 13px; padding: 2px 9px; border-radius: 999px; background: var(--blue-bg); color: var(--blue); }
+  button.primary { background: var(--accent); color: #fff; border: 0; border-radius: 10px; padding: 14px 26px;
+                   font-size: 18px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+  button.primary:disabled { opacity: .55; cursor: progress; }
+  .agents { grid-template-columns: repeat(4, 1fr); margin-top: 16px; }
+  .agent h3 { margin: 0; font-size: 17px; display: flex; align-items: center; gap: 8px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: #c5cad3; flex: none; }
+  .running .dot { background: var(--blue); animation: pulse 1s infinite; }
+  .done .dot { background: var(--green); }
+  .error .dot { background: var(--red); }
+  @keyframes pulse { 50% { opacity: .3; } }
+  .agent .status { font-size: 13px; color: var(--muted); margin-left: auto; text-transform: uppercase; letter-spacing: .5px; }
+  .agent .nums { display: flex; gap: 18px; margin: 10px 0 6px; }
+  .agent .num { font-size: 28px; font-weight: 700; line-height: 1; }
+  .agent .lbl { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .4px; }
+  .agent .msg { font-size: 14px; color: var(--muted); min-height: 40px; overflow-wrap: anywhere; }
+  .agent a.portal { display: inline-block; margin-top: 6px; font-size: 14px; color: var(--red); font-weight: 600; }
+  .pipeline { margin-top: 12px; padding: 10px 14px; border-radius: 10px; background: var(--card);
+              border: 1px solid var(--line); font-size: 15px; color: var(--muted); min-height: 44px; }
+  .pipeline b { color: var(--ink); }
+  .lower { grid-template-columns: minmax(380px, 5fr) 7fr; margin-top: 16px; align-items: start; }
+  .section-title { font-size: 18px; margin: 0 0 10px; display: flex; align-items: baseline; gap: 10px; }
+  .section-title small { color: var(--muted); font-weight: 400; font-size: 14px; }
+  .match { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; margin-bottom: 10px;
+           cursor: pointer; background: #fff; }
+  .match:hover { border-color: #b9c2d3; }
+  .match.sel { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(27,58,107,.15); }
+  .match .t { font-weight: 600; margin: 6px 0 4px; overflow-wrap: anywhere; }
+  .match .meta { font-size: 14px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 4px 14px; }
+  .chip { display: inline-block; font-size: 13px; font-weight: 700; padding: 3px 10px; border-radius: 999px; letter-spacing: .3px; }
+  .ELIGIBLE { background: var(--green-bg); color: var(--green); }
+  .CHECK_DOCS { background: var(--amber-bg); color: var(--amber); }
+  .NOT_ELIGIBLE { background: var(--red-bg); color: var(--red); }
+  .portal-tag { font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; margin-left: 8px; }
+  details.low summary { cursor: pointer; color: var(--muted); margin: 8px 0; }
+  details.low .match { opacity: .75; }
+  .empty { color: var(--muted); padding: 18px 4px; }
+  .detail h2 { margin: 8px 0 4px; font-size: 20px; overflow-wrap: anywhere; }
+  .detail .sub { color: var(--muted); font-size: 15px; margin-bottom: 12px; }
+  .reason { border-left: 4px solid var(--line); padding: 8px 12px; margin: 10px 0; background: #fafbfc; border-radius: 0 8px 8px 0; }
+  .reason.ok { border-color: var(--green); } .reason.warn { border-color: var(--amber); }
+  .reason.fail { border-color: var(--red); } .reason.info { border-color: var(--blue); }
+  .reason .head { font-weight: 600; display: flex; gap: 8px; align-items: baseline; }
+  .icon { display: inline-flex; width: 22px; height: 22px; border-radius: 50%; align-items: center; justify-content: center;
+          font-size: 13px; font-weight: 800; flex: none; }
+  .ok .icon { background: var(--green-bg); color: var(--green); } .warn .icon { background: var(--amber-bg); color: var(--amber); }
+  .fail .icon { background: var(--red-bg); color: var(--red); } .info .icon { background: var(--blue-bg); color: var(--blue); }
+  .excerpt { margin-top: 8px; font: 13.5px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: pre-wrap;
+             background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 10px; color: #3a4150;
+             max-height: 220px; overflow: auto; }
+  .excerpt mark { background: var(--hl); color: #111; padding: 1px 0; border-radius: 2px; }
+  .clause { margin-top: 6px; font-size: 14px; color: var(--muted); font-style: italic; }
+  .detail h3 { font-size: 16px; margin: 18px 0 6px; }
+  .detail ul { margin: 0; padding-left: 20px; }
+  .detail li { margin: 3px 0; }
+  a { color: var(--blue); }
+  .err { color: var(--red); }
+  @media (max-width: 1100px) { .agents { grid-template-columns: repeat(2, 1fr); } .lower { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>TenderHawk</h1>
+  <span class="tag">AI agents that find government tenders a small business can actually win</span>
+  <span class="mode" id="mode">checking API…</span>
+</header>
+<main>
+  <div class="row top">
+    <div class="card profile" id="profile"><span class="empty">Loading profile…</span></div>
+    <button class="primary" id="sweep">Sweep now</button>
+  </div>
+
+  <div class="row agents" id="agents"></div>
+  <div class="pipeline" id="pipeline">Press <b>Sweep now</b> to send the agents out.</div>
+
+  <div class="row lower">
+    <div class="card">
+      <div class="section-title">Matches <small id="mcount"></small></div>
+      <div id="matches"><div class="empty">No matches yet.</div></div>
+    </div>
+    <div class="card detail" id="detail"><div class="empty">Select a match to see the verdict, reasons and the exact clauses.</div></div>
+  </div>
+</main>
+
+<script>
+"use strict";
+const API = "";  // same origin as the API
+const params = new URLSearchParams(location.search);
+const PROFILE_ID = parseInt(params.get("profile") || "1", 10) || 1;
+const AGENTS = [["gem", "GeM"], ["cppp", "CPPP"], ["haryana", "Haryana e-proc"], ["corrigenda", "Corrigenda search"]];
+const VERDICT_LABEL = { ELIGIBLE: "ELIGIBLE", CHECK_DOCS: "CHECK DOCS", NOT_ELIGIBLE: "NOT ELIGIBLE" };
+const ICON = { ok: "✓", warn: "!", fail: "✕", info: "i" };
+let selectedId = null;
+let es = null;
+
+function esc(v) {
+  return String(v == null ? "" : v).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+function safeUrl(u) {
+  return /^https?:\/\//i.test(u || "") ? esc(u) : "#";
+}
+function inr(v) {
+  if (v == null) return "—";
+  if (v >= 1e7) return "₹" + +(v / 1e7).toFixed(2) + " Cr";
+  if (v >= 1e5) return "₹" + +(v / 1e5).toFixed(2) + " L";
+  return "₹" + Math.round(v).toLocaleString("en-IN");
+}
+let clockOffset = 0;  // API clock (frozen demo clock in fallback mode) minus browser clock, from /health
+function deadline(iso) {
+  const end = new Date(iso), ms = end - (Date.now() + clockOffset);
+  const date = end.toLocaleDateString("en-IN", { timeZone: "Asia/Kolkata", day: "2-digit", month: "short" });
+  if (ms <= 0) return "closed " + date;
+  const d = Math.floor(ms / 864e5), h = Math.floor(ms % 864e5 / 36e5), m = Math.floor(ms % 36e5 / 6e4);
+  return "closes in " + (d ? d + "d " + h + "h" : h ? h + "h " + m + "m" : m + "m") + " · " + date;
+}
+async function getJSON(path, opts) {
+  const r = await fetch(API + path, opts);
+  if (!r.ok) throw new Error(path + " → HTTP " + r.status);
+  return r.json();
+}
+
+/* ---------- health + profile ---------- */
+async function loadHealth() {
+  try {
+    const h = await getJSON("/health");
+    const t = new Date(h.now).getTime();
+    clockOffset = Number.isNaN(t) ? 0 : t - Date.now();
+    document.getElementById("mode").textContent =
+      (h.fallback_mode ? "Fallback mode (recorded runs)" : "Live mode") + " · DB " + (h.db ? "✓" : "✕") + " · Redis " + (h.redis ? "✓" : "✕");
+  } catch (e) { document.getElementById("mode").textContent = "API unreachable"; }
+}
+async function loadProfile() {
+  const el = document.getElementById("profile");
+  try {
+    const p = await getJSON("/profiles/" + PROFILE_ID);
+    const pills = (p.certifications || []).map(c => `<span class="pill">${esc(c)}</span>`).join("");
+    el.innerHTML = `
+      <h2>${esc(p.name)}</h2>
+      <div class="facts">
+        <span>Turnover <b>${inr(p.annual_turnover)}</b></span>
+        <span><b>${esc(p.years_in_business ?? "—")}</b> years in business</span>
+        <span>Serves <b>${esc((p.states_served || []).join(", ") || "—")}</b></span>
+      </div>
+      <div class="facts" style="margin-top:4px">
+        <span>Searching for <b>${esc((p.keywords || []).join(", ") || (p.products || []).join(", "))}</b></span>
+      </div>
+      <div class="pills">${pills}</div>`;
+  } catch (e) {
+    el.innerHTML = `<span class="err">Profile ${PROFILE_ID} not found. Run <code>python -m delivery.seed</code> or open <code>/demo?profile=&lt;id&gt;</code>.</span>`;
+    document.getElementById("sweep").disabled = true;
+  }
+}
+
+/* ---------- agent cards ---------- */
+const state = {};
+function resetAgents() {
+  for (const [key] of AGENTS) state[key] = { status: "idle", steps: 0, msg: "Waiting", count: null, url: null };
+  renderAgents();
+}
+function renderAgents() {
+  document.getElementById("agents").innerHTML = AGENTS.map(([key, label]) => {
+    const s = state[key];
+    const countLbl = key === "corrigenda" ? "new notices" : "bids found";
+    return `<div class="card agent ${s.status}">
+      <h3><span class="dot"></span>${esc(label)}<span class="status">${esc(s.status)}</span></h3>
+      <div class="nums">
+        <div><div class="num">${s.steps}</div><div class="lbl">steps</div></div>
+        <div><div class="num">${s.count == null ? "–" : s.count}</div><div class="lbl">${countLbl}</div></div>
+      </div>
+      <div class="msg">${esc(s.msg)}</div>
+      ${s.status === "error" && s.url ? `<a class="portal" href="${safeUrl(s.url)}" target="_blank" rel="noopener">Open on portal ↗</a>` : ""}
+    </div>`;
+  }).join("");
+}
+function onEvent(ev) {
+  if (ev.agent === "all") {
+    const pl = document.getElementById("pipeline");
+    if (ev.type === "done") {
+      pl.innerHTML = "<b>Done.</b> " + esc(ev.message);
+      finishSweep(!!ev.pending);  // documents still pending: keep listening for update/settled
+    } else if (ev.type === "update") {
+      pl.innerHTML = "<b>Still reading:</b> " + esc(ev.message) + "…";
+      loadMatches();
+    } else if (ev.type === "settled") {
+      pl.innerHTML = "<b>Done.</b> " + esc(ev.message) + ".";
+      finishSweep();
+    } else if (ev.type === "error") {
+      pl.innerHTML = `<span class="err">${esc(ev.message)}</span>`;
+    } else {
+      pl.innerHTML = "<b>Pipeline:</b> " + esc(ev.message) + "…";
+    }
+    return;
+  }
+  const s = state[ev.agent];
+  if (!s) return;
+  s.steps = Math.max(s.steps, ev.step || 0);
+  s.msg = ev.message || s.msg;
+  if (ev.type === "started" || ev.type === "step") s.status = "running";
+  if (ev.type === "result") { s.status = "done"; s.count = ev.count; }
+  if (ev.type === "error") { s.status = "error"; s.url = ev.direct_url; }
+  renderAgents();
+}
+
+/* ---------- sweep ---------- */
+async function startSweep() {
+  const btn = document.getElementById("sweep");
+  btn.disabled = true; btn.textContent = "Sweeping…";
+  resetAgents();
+  document.getElementById("pipeline").innerHTML = "<b>Starting sweep…</b>";
+  try {
+    const { sweep_id } = await getJSON("/sweeps", {
+      method: "POST", headers: { "content-type": "application/json" },
+      body: JSON.stringify({ profile_id: PROFILE_ID }),
+    });
+    let finished = false;
+    es = new EventSource(API + "/sweeps/" + encodeURIComponent(sweep_id) + "/events");
+    es.onmessage = m => {
+      const ev = JSON.parse(m.data);
+      if (ev.agent === "all" && (ev.type === "settled" || (ev.type === "done" && !ev.pending))) finished = true;
+      onEvent(ev);
+    };
+    es.onerror = () => {
+      if (!finished) document.getElementById("pipeline").innerHTML = '<span class="err">Lost the live connection to the sweep.</span>';
+      finishSweep();
+    };
+  } catch (e) {
+    document.getElementById("pipeline").innerHTML = `<span class="err">${esc(e.message)}</span>`;
+    finishSweep();
+  }
+}
+function finishSweep(keepListening) {
+  if (es && !keepListening) { es.close(); es = null; }
+  const btn = document.getElementById("sweep");
+  btn.disabled = false; btn.textContent = "Sweep now";
+  loadMatches();
+}
+
+/* ---------- matches ---------- */
+function matchCard(m) {
+  const t = m.tender;
+  const fit = m.fit_score == null ? "" : `<span>fit ${Math.round(m.fit_score * 100)}%</span>`;
+  return `<div class="match ${m.id === selectedId ? "sel" : ""}" data-id="${m.id}">
+    <span class="chip ${esc(m.verdict)}">${esc(VERDICT_LABEL[m.verdict] || m.verdict)}</span>
+    <span class="portal-tag">${esc(t.portal)}</span>
+    <div class="t">${esc(t.title)}</div>
+    <div class="meta">
+      <span>${esc(t.buyer || "—")}</span>
+      <span>${inr(t.est_value)}</span>
+      <span>${esc(deadline(t.end_date))}</span>
+      ${fit}
+    </div>
+  </div>`;
+}
+async function loadMatches() {
+  const box = document.getElementById("matches");
+  try {
+    const ms = await getJSON("/profiles/" + PROFILE_ID + "/matches");
+    const rel = ms.filter(m => m.relevant), low = ms.filter(m => !m.relevant);
+    const n = v => rel.filter(m => m.verdict === v).length;
+    document.getElementById("mcount").textContent = ms.length
+      ? `${n("ELIGIBLE")} eligible · ${n("CHECK_DOCS")} check docs · ${n("NOT_ELIGIBLE")} not eligible` + (low.length ? ` · ${low.length} low relevance` : "")
+      : "";
+    if (!ms.length) { box.innerHTML = '<div class="empty">No matches yet. Run a sweep.</div>'; return; }
+    box.innerHTML = (rel.length ? rel.map(matchCard).join("") : '<div class="empty">No relevant tenders in this sweep.</div>')
+      + (low.length ? `<details class="low"><summary>${low.length} low-relevance tenders</summary>${low.map(matchCard).join("")}</details>` : "");
+    box.querySelectorAll(".match").forEach(el => el.addEventListener("click", () => openMatch(+el.dataset.id)));
+  } catch (e) {
+    box.innerHTML = `<div class="err">${esc(e.message)}</div>`;
+  }
+}
+
+/* ---------- detail ---------- */
+function excerptHTML(ex) {
+  if (!ex) return "";
+  const t = ex.text || "";
+  const a = Math.max(0, ex.highlight_start), b = Math.min(t.length, ex.highlight_end);
+  return `<div class="excerpt">${ex.prefix_truncated ? "…" : ""}${esc(t.slice(0, a))}<mark>${esc(t.slice(a, b))}</mark>${esc(t.slice(b))}${ex.suffix_truncated ? "…" : ""}</div>`;
+}
+function reasonHTML(r) {
+  const kind = ICON[r.kind] ? r.kind : "info";
+  let body = excerptHTML(r.excerpt);
+  if (!body && r.source_clause) body = `<div class="clause">“${esc(r.source_clause)}”</div>`;
+  const link = r.source_url ? ` <a href="${safeUrl(r.source_url)}" target="_blank" rel="noopener">notice ↗</a>` : "";
+  return `<div class="reason ${kind}"><div class="head"><span class="icon">${ICON[kind]}</span><span>${esc(r.text)}${link}</span></div>${body}</div>`;
+}
+async function openMatch(id) {
+  selectedId = id;
+  document.querySelectorAll(".match").forEach(el => el.classList.toggle("sel", +el.dataset.id === id));
+  const box = document.getElementById("detail");
+  box.innerHTML = '<div class="empty">Loading…</div>';
+  try {
+    const m = await getJSON("/matches/" + id);
+    const t = m.tender;
+    const docs = (m.missing_docs || []).map(d => `<li>${esc(d)}</li>`).join("");
+    const corr = (m.corrigenda || []).map(c =>
+      `<li>${esc(c.summary)} ${c.source_url ? `<a href="${safeUrl(c.source_url)}" target="_blank" rel="noopener">source ↗</a>` : ""}</li>`).join("");
+    box.innerHTML = `
+      <span class="chip ${esc(m.verdict)}">${esc(VERDICT_LABEL[m.verdict] || m.verdict)}</span>
+      <span class="portal-tag">${esc(t.portal)} · ${esc(t.bid_no)}</span>
+      <h2>${esc(t.title)}</h2>
+      <div class="sub">${esc(t.buyer || "—")} · ${inr(t.est_value)}${t.quantity ? " · qty " + esc(t.quantity) : ""} · ${esc(deadline(t.end_date))}
+        · <a href="${safeUrl(t.source_url)}" target="_blank" rel="noopener">open bid ↗</a></div>
+      <h3>Why this verdict</h3>
+      ${(m.reasons || []).map(reasonHTML).join("") || '<div class="empty">No reasons recorded.</div>'}
+      <h3>Document checklist</h3>
+      ${docs ? `<ul>${docs}</ul>` : '<div class="empty">Nothing extra required.</div>'}
+      ${corr ? `<h3>Corrigenda</h3><ul>${corr}</ul>` : ""}`;
+  } catch (e) {
+    box.innerHTML = `<div class="err">${esc(e.message)}</div>`;
+  }
+}
+
+/* ---------- boot ---------- */
+document.getElementById("sweep").addEventListener("click", startSweep);
+resetAgents();
+loadHealth().then(loadMatches);  // countdowns need the API clock first
+loadProfile();
+setInterval(() => { if (!es) loadMatches(); }, 60000);  // keep deadline countdowns fresh
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+{
+  "name": "Ramesh Steel Fabricators",
+  "phone": "+919800000000",
+  "email": "ramesh@example.com",
+  "products": [
+    "steel storage racks",
+    "slotted angle racks",
+    "steel almirah",
+    "fabricated steel structures",
+    "industrial shelving"
+  ],
+  "keywords": [
+    "steel almirah",
+    "storage rack",
+    "steel rack"
+  ],
+  "hsn_codes": [
+    "9403",
+    "7308",
+    "7326"
+  ],
+  "annual_turnover": 12000000,
+  "years_in_business": 8,
+  "certifications": [
+    "Udyam",
+    "MSE",
+    "GeM Seller"
+  ],
+  "states_served": [
+    "Haryana",
+    "Delhi",
+    "Uttar Pradesh",
+    "Rajasthan"
+  ]
+}
